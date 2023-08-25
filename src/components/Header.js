@@ -1,16 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Si estás utilizando React Router para la navegación
+import React from "react";
+import { Link } from 'react-router-dom';
+import logoUTN from '../images/logoUTN.png'
 
 export function Header() {
   return (
-    <div className='container'>
-        <div className='card mb-3'>
-            <div className='card-header'>
-                <p className='text-center'>
-                <Link to='/'>Inicio</Link> | <Link to='/turnos'>Turnos</Link> | <Link to='/gestion-usuario'>Gestion de Usuario</Link>
-                </p>
-            </div>
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="collapse navbar-collapse" id="navbarNav" style={{marginLeft: '10px'}}>
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link to='/' className="nav-link">Principal<span className="sr-only"></span></Link>
+            </li>
+            <li className="nav-item">
+              <Link to='/turnos' className="nav-link">Turnos</Link>
+            </li>
+            <li className="nav-item">
+              <Link to='/gestion-usuario' className="nav-link">Gestión de Usuario</Link>
+            </li>
+          </ul>
         </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginRight: '15px' }}>
+          <img src={logoUTN} alt="Logo" style={{ width: '50px', height: '50px' }} />
+        </div>
+      </nav>
+      <hr style={{height: '.5px'}} />
     </div>
   );
 }

@@ -1,35 +1,32 @@
-//import 'bootstrap/dist/css/bootstrap.min.css'
-//import 'bootstrap/dist/js/bootstrap.min.js'
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import React from 'react';
-import { BrowserRouter, Router, Switch, Route} from 'react-router-dom';
+import './App.css';
+
+import { Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Header } from './components/Header';
-import {Inicio} from './components/Inicio';
-
-function Turnos() {
-  return <div>Página de Turnos</div>;
-}
-
-function GestionUsuario() {
-  return <div>Página de Gestión de Usuario</div>;
-}
+import { Inicio } from './components/Inicio'
+import { ErrorNotFound } from './components/Error/ErrorNotFound';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <div className="App">
-          <Header />
+    <BrowserRouter>
+      <div className='App'>
+        <Header />
 
-          <main>
-            <Route path="/" element={<Inicio />}/>
-          </main>
-        </div>
-      </BrowserRouter>
-    </>
-  );
+        <main>
+          <Routes>
+            <Route path='/' element={<Inicio />} />
+
+            <Route path='/*' element={<ErrorNotFound />} />
+          </Routes>
+        </main>
+
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;
