@@ -1,6 +1,7 @@
 import React from "react";
 
 import logoTurno from "../images/logoTurno.png";
+import logoCudar from "../images/logoCudar.jpg";
 
 export function Inicio() {
     return (
@@ -23,6 +24,11 @@ export function Inicio() {
             <div>
                 <img src={logoTurno} alt="Logo" style={{ width: "200px", height: "200px" }}></img>
             </div>
+            <footer>
+                <div>
+                    <img src={logoCudar} alt="Logo" style={{width:"90px", height: "90px", float: "right", marginRight: "10px"}}></img>
+                </div>
+            </footer>
         </>
     )
 }
