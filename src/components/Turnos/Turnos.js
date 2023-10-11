@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import turnos from "./mockTurnos.js";
 import { ModificarTurno } from "./ModificarTurno.js";
 import { CrearTurno } from "./CrearTurno.js";
+
+import materiasService from '../../services/turnos.service.js';
 
 export function Turnos() {
 
@@ -18,15 +19,15 @@ export function Turnos() {
     //Mostrar crear turno
     const [mostrarCreacion, setMostrarCreacion] = useState(false);
 
-    let mockTurnos = turnos;
-
     useEffect(() => {
         const fetchData = async () => {
-            setLista(mockTurnos);
+            //setLista(mockTurnos);
+            const turnos = await materiasService.getAllTurnos();
+            setLista(turnos);
         };
 
         fetchData();
-    });
+    }, []);
 
     const mostrarModificarTurno = (fila) => {
         if (fila === filaSeleccionada) {
@@ -48,7 +49,6 @@ export function Turnos() {
 
     const mostrarCrearTurno = () => {
         setMostrarCreacion(!mostrarCreacion);
-        console.log(mostrarCreacion)
     }
 
     return (
@@ -96,21 +96,21 @@ export function Turnos() {
                                         <th>Id Turno</th>
                                         <th>Legajo Usuario</th>
                                         <th>Cancelado</th>
-                                        <th>Fecha y Hora de Creación</th>
+                                        <th>Fecha y Hora de Inicio</th>
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {lista !== undefined && lista.length > 0 ?
+                                    {lista !== undefined && lista.length > 0 ? 
                                         lista
-                                            .filter(t => mostrarCancelados || !t.cancelado)
+                                            .filter(t => (mostrarCancelados || t.nombreEstadoTurno.nombre !== 'Cancelado') || (t.nombreEstadoTurno.nombre !== 'Cancelado'))
                                             .map((t, index) => (
-                                                <React.Fragment key={t.idTurno}>
+                                                <React.Fragment key={t.turno.idTurno}>
                                                     <tr>
-                                                        <td>{t.idTurno}</td>
-                                                        <td>{t.legajoUsuario}</td>
-                                                        <td>{t.cancelado === true ? 'Si' : 'No'}</td>
-                                                        <td>{t.fechaHoraCreacion}</td>
+                                                        <td>{t.turno.idTurno}</td>
+                                                        <td>{t.turno.usuarioLegajo}</td>
+                                                        <td>{t.nombreEstadoTurno.nombre === 'Cancelado' ? 'Si' : 'No'}</td>
+                                                        <td>{t.detalleTurno.diaHoraInicio}</td>
                                                         <td>
                                                             <button
                                                                 type="button"
