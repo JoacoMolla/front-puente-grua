@@ -21,7 +21,6 @@ export function Turnos() {
 
     useEffect(() => {
         const fetchData = async () => {
-            //setLista(mockTurnos);
             const turnos = await materiasService.getAllTurnos();
             setLista(turnos);
         };
