@@ -38,6 +38,11 @@ export function Turnos() {
         }
     }
 
+    const handleCrearTurnoSubmit = async () => {
+        const turnos = await materiasService.getAllTurnos();
+        setLista(turnos);
+    }
+
     const eliminarTurno = (fila) => {
         console.log('Eliminar turno', fila)
     }
@@ -48,6 +53,11 @@ export function Turnos() {
 
     const mostrarCrearTurno = () => {
         setMostrarCreacion(!mostrarCreacion);
+    }
+
+    const transformarFechaACadena = (fecha) => {
+        return `${fecha.toLocaleDateString()}` + ' ' +
+        `${fecha.toLocaleTimeString()}`
     }
 
     return (
@@ -83,7 +93,7 @@ export function Turnos() {
                 </div>
 
                 {mostrarCreacion &&
-                    <CrearTurno />}
+                    <CrearTurno onSubmitComplete={handleCrearTurnoSubmit}/>}
 
                 {/* Modificacion y baja de turno */}
                 <div className="container">
@@ -109,7 +119,7 @@ export function Turnos() {
                                                         <td>{t.turno.idTurno}</td>
                                                         <td>{t.turno.usuarioLegajo}</td>
                                                         <td>{t.nombreEstadoTurno.nombre === 'Cancelado' ? 'Si' : 'No'}</td>
-                                                        <td>{t.detalleTurno.diaHoraInicio}</td>
+                                                        <td>{transformarFechaACadena(new Date(t.detalleTurno.diaHoraInicio))}</td>
                                                         <td>
                                                             <button
                                                                 type="button"

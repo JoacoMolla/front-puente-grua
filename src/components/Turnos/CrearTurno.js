@@ -2,15 +2,16 @@ import { useForm } from "react-hook-form";
 import React from "react-hook-form";
 import zonasService from "../../services/zonas.service";
 import { useState, useEffect } from "react";
+import turnosService from "../../services/turnos.service";
 
-
-export function CrearTurno() {
+export function CrearTurno({onSubmitComplete}) {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    //console.log(errors);
-
-    const onSubmit = () => {
+    // Cargar el nuevo turno
+    const onSubmit = async (data) => {
+        const res = await turnosService.postNuevoTurno(data);
+        onSubmitComplete()
     };
 
     const [listaZona, setListaZona] = useState([])
@@ -24,11 +25,9 @@ export function CrearTurno() {
         fetchData();
     }, [])
 
-    let enMismoDia = false;
-
     return (
         <>
-            <form onSubmit={handleSubmit((data) => { console.log('Formulario enviado', data) })}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="container my-2">
                     <div className="card" style={{ display: "flex", textAlign: "left" }}>
                         <div className="card-body">
@@ -55,9 +54,6 @@ export function CrearTurno() {
                                             }
                                         })}
                                     />
-                                    {
-                                        errors.fechaInicioTurno && <span color="red">{errors.fechaInicioTurno.message}</span>
-                                    }
                                 </div>
                                 <div className="form-group col-md-2">
                                     <label>Hora del turno</label>
@@ -76,7 +72,14 @@ export function CrearTurno() {
                                     <label>Zona inicial</label>
                                     <select className="form-control"
                                     // Crear una validacion de que no se seleccione default
-                                    {...register("zonaInicial")}>
+                                    {...register("zonaInicial", {
+                                        validate: (value) => {
+                                            if (value === "Seleccione la zona inicial") {
+                                                return "Seleccione una zona de las disponibles."
+                                            } return true;
+                                        }
+                                    })}
+                                    >
                                         <option>Seleccione la zona inicial</option>
                                         {listaZona !== null 
                                         ? 
@@ -89,10 +92,28 @@ export function CrearTurno() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Mostrar errores */}
+                        <div className="container my-2">
+                        {
+                            errors.fechaInicioTurno &&
+                            <span style={{color: "red"}}>{errors.fechaInicioTurno.message}</span>
+                        }
+                        {
+                            errors.horaTurno && 
+                            <span style={{color: "red"}}>{' ' + errors.horaTurno.message}</span>
+                        }
+                        {
+                            errors.zonaInicial && 
+                            <span style={{color: "red"}}>{' ' + errors.zonaInicial.message}</span>
+                        }
+                        </div>
+
                         <div className="container my-2">
                             <button
                                 type="submit"
-                                className="btn btn-success">Crear turno</button>
+                                className="btn btn-success"
+                                >Crear turno</button>
                         </div>
                     </div>
                 </div>
