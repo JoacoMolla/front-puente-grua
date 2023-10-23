@@ -34,7 +34,7 @@ export function CrearTurno({onSubmitComplete}) {
                             <h5>Registrar nuevo turno</h5>
 
                             <div className="form-row row">
-                                <div className="form-group col-md-2">
+                                <div className="form-group col-md-3">
 
                                     <label>Fecha del turno</label>
                                     <input

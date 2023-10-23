@@ -15,10 +15,15 @@ const getAllTurnos = async () => {
 const postNuevoTurno = async (datos) => {
     try {
         const res = await axios.post(`${apiURL}/turnos`, datos);
-        window.alert('Turno cargado con éxito.')
+        if (res.data.error) {
+            window.alert(res.data.error);
+        } else {
+            window.alert('Turno cargado con éxito.');
+        }
+
         return res;
     } catch (err) {
-        return err.message
+        return err.message;
     }
 }
 
