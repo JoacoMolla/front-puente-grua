@@ -7,8 +7,7 @@ const getAllTurnos = async () => {
         const res = await axios.get(`${apiURL}/turnos`);
         return res.data;
     } catch (err) {
-        window.alert('No se pudo acceder al servidor de Backend')
-        return
+        return []
     }
 }
 
@@ -16,20 +15,37 @@ const postNuevoTurno = async (datos) => {
     try {
         const res = await axios.post(`${apiURL}/turnos`, datos);
         if (res.data.error) {
-            window.alert(res.data.error);
+            return res.data.error;
         } else {
-            window.alert('Turno cargado con éxito.');
+            return 'Turno cargado con éxito.';
         }
 
-        return res;
     } catch (err) {
-        return err.message;
+        return 'No se pudo acceder al servidor de Backend';
+    }
+}
+
+const deleteTurno = async (datos) => {
+    try {
+        const res = await axios.delete(`${apiURL}/turnos`, {
+            params: {
+                idTurno: datos
+            }
+        })
+        if (res.data.err) {
+            return res.data.error;
+        } else {
+            return 'Turno eliminado con éxito'
+        }
+    } catch (err) {
+        return 'No se pudo acceder al servidor de Backend'
     }
 }
 
 const turnosService = {
     getAllTurnos,
-    postNuevoTurno
+    postNuevoTurno,
+    deleteTurno
 }
 
 export default turnosService;

@@ -3,6 +3,7 @@ import { ModificarTurno } from "./ModificarTurno.js";
 import { CrearTurno } from "./CrearTurno.js";
 
 import materiasService from '../../services/turnos.service.js';
+import turnosService from "../../services/turnos.service.js";
 
 export function Turnos() {
 
@@ -43,10 +44,12 @@ export function Turnos() {
         setLista(turnos);
     }
 
-    const eliminarTurno = (fila) => {
-        console.log('Eliminar turno', fila)
+    const eliminarTurno = async (fila) => {
+        const res = await turnosService.deleteTurno(fila.turno.idTurno);
+        window.alert(res);
+        const turnos = await materiasService.getAllTurnos();
+        setLista(turnos);
     }
-
     const mostrarTurnosCancelados = () => {
         setTurnosCancelados(!mostrarCancelados);
     }
@@ -102,7 +105,7 @@ export function Turnos() {
                             <table className="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Id Turno</th>
+                                        <th>Zona Inicial</th>
                                         <th>Legajo Usuario</th>
                                         <th>Cancelado</th>
                                         <th>Fecha y Hora de Inicio</th>
@@ -116,7 +119,7 @@ export function Turnos() {
                                             .map((t, index) => (
                                                 <React.Fragment key={t.turno.idTurno}>
                                                     <tr>
-                                                        <td>{t.turno.idTurno}</td>
+                                                        <td>{t.zonaInicial.nroZonaInicial}</td>
                                                         <td>{t.turno.usuarioLegajo}</td>
                                                         <td>{t.nombreEstadoTurno.nombre === 'Cancelado' ? 'Si' : 'No'}</td>
                                                         <td>{transformarFechaACadena(new Date(t.detalleTurno.diaHoraInicio))}</td>
