@@ -11,6 +11,8 @@ export function ModificarTurno({ turno }) {
         // Cargar nuevo estado del turno (para backend)
     };
 
+    console.log(turno)
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">

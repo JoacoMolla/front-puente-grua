@@ -60,7 +60,7 @@ export function Turnos() {
 
     const transformarFechaACadena = (fecha) => {
         return `${fecha.toLocaleDateString()}` + ' ' +
-        `${fecha.toLocaleTimeString()}`
+            `${fecha.toLocaleTimeString()}`
     }
 
     return (
@@ -96,7 +96,7 @@ export function Turnos() {
                 </div>
 
                 {mostrarCreacion &&
-                    <CrearTurno onSubmitComplete={handleCrearTurnoSubmit}/>}
+                    <CrearTurno onSubmitComplete={handleCrearTurnoSubmit} />}
 
                 {/* Modificacion y baja de turno */}
                 <div className="container">
@@ -113,7 +113,7 @@ export function Turnos() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {lista !== undefined && lista.length > 0 ? 
+                                    {lista !== undefined && lista.length > 0 ?
                                         lista
                                             .filter(t => (mostrarCancelados || t.nombreEstadoTurno.nombre !== 'Cancelado') || (t.nombreEstadoTurno.nombre !== 'Cancelado'))
                                             .map((t, index) => (
@@ -138,7 +138,7 @@ export function Turnos() {
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    {filaSeleccionada === index && mostrarModificar && (
+                                                    {filaSeleccionada === index && mostrarModificar && t.nombreEstadoTurno !== 'Cancelado' && (
                                                         <tr>
                                                             <td colSpan="5">
                                                                 <ModificarTurno turno={t} />

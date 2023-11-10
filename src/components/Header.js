@@ -14,9 +14,9 @@ export function Header() {
             <li className="nav-item">
               <Link to='/turnos' className="nav-link">Turnos</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to='/gestion-usuario' className="nav-link">Gestión de Usuario</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginRight: '15px' }}>

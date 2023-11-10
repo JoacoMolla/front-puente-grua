@@ -24,7 +24,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Inicio />} />
             <Route path='/turnos' element={<Turnos />} />
-            <Route path='/gestion-usuario' element={<GestionUsuario />} />
+            {/* <Route path='/gestion-usuario' element={<GestionUsuario />} /> */}
 
             <Route path='/*' element={<ErrorNotFound />} />
           </Routes>
