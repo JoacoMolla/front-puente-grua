@@ -10,6 +10,12 @@ export function CrearTurno({ onSubmitComplete }) {
 
     // Cargar el nuevo turno
     const onSubmit = async (data) => {
+        const fechaTurno = new Date(data.fechaInicioTurno + 'T' + data.horaTurno);
+        const fechaActual = new Date();
+        if (fechaActual > fechaTurno) {
+            window.alert('La fecha y hora actual es mayor que la del turno para cargar.')
+            return
+        }
         const res = await turnosService.postNuevoTurno(data);
         window.alert(res)
         onSubmitComplete();
@@ -44,16 +50,16 @@ export function CrearTurno({ onSubmitComplete }) {
                                             required: {
                                                 value: true,
                                                 message: "La fecha del turno es requerida."
-                                                // },
-                                                // validate: (value) => {
-                                                //     const fechaTurno = new Date(value);
-                                                //     const fechaActual = new Date();
-                                                //     if (fechaTurno < fechaActual) {
-                                                //         console.log('fecha turno: ', fechaTurno, 'fecha actual: ', fechaActual)
-                                                //         return "La fecha del turno no puede ser en el pasado ni en el mismo dia.";
-                                                //     }
-                                                //     return true;
-                                            }
+                                                },
+                                            //     validate: (value) => {
+                                            //         const fechaTurno = new Date(value);
+                                            //         const fechaActual = new Date();
+                                            //         if (fechaTurno < fechaActual) {
+                                            //             console.log('fecha turno: ', fechaTurno, 'fecha actual: ', fechaActual)
+                                            //             return "La fecha del turno no puede ser en el pasado ni en el mismo dia.";
+                                            //         }
+                                            //         return true;
+                                            // }
                                         })}
                                     />
                                 </div>
