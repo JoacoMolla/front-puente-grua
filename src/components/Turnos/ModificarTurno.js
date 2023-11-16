@@ -1,20 +1,26 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import turnosService from "../../services/turnos.service";
 
-export function ModificarTurno({ turno }) {
-    const [cancelado, setCancelado] = useState(turno.cancelado);
+export function ModificarTurno({ turno, onSubmitComplete }) {
+    const [cancelado, setCancelado] = useState(false);
+    const { handleSubmit } = useForm();
 
     const handleCanceladoChange = (e) => {
         setCancelado(e.target.value === "1");
     };
 
-    const handleSubmit = async () => {
-        // Cargar nuevo estado del turno (para backend)
+    const onSubmit = async (data) => {
+        if (cancelado) {
+            const res = await turnosService.updateTurnoCancelado
+            (turno.turno.idTurno, 'Cancelado por el usuario');
+            window.alert(res);
+            onSubmitComplete();
+        }
     };
 
-    console.log(turno)
-
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
                 <div className="col-md">
                     <div className="form-floating">
@@ -32,7 +38,7 @@ export function ModificarTurno({ turno }) {
                 </div>
             </div>
             <div className="col-md-8 text-start">
-                <button style={{marginTop: "10px"}} className='btn btn-primary'>Guardar</button>
+                <button style={{ marginTop: "10px" }} className='btn btn-primary'>Guardar</button>
             </div>
         </form>
     );

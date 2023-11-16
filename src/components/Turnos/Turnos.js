@@ -138,10 +138,12 @@ export function Turnos() {
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    {filaSeleccionada === index && mostrarModificar && t.nombreEstadoTurno !== 'Cancelado' && (
+                                                    {filaSeleccionada === index && mostrarModificar && t.nombreEstadoTurno.nombre !== 'Cancelado' && (
                                                         <tr>
                                                             <td colSpan="5">
-                                                                <ModificarTurno turno={t} />
+                                                                <ModificarTurno 
+                                                                turno={t}
+                                                                onSubmitComplete={handleCrearTurnoSubmit} />
                                                             </td>
                                                         </tr>
                                                     )}

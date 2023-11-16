@@ -42,10 +42,30 @@ const deleteTurno = async (datos) => {
     }
 }
 
+const updateTurnoCancelado = async (idTurno, descripcion) => {
+    try {
+        const res = await axios.put(`${apiURL}/turnos`, {
+            params: {
+                idTurno: idTurno,
+                descripcion: descripcion
+            }
+        })
+        console.log(res)
+        if (res.data.err) {
+            return res.data.err;
+        } else {
+            return 'Turno cancelado con éxito'
+        }
+    } catch (err) {
+        return 'No se pudo acceder al servidor de Backend'
+    }
+}
+
 const turnosService = {
     getAllTurnos,
     postNuevoTurno,
-    deleteTurno
+    deleteTurno,
+    updateTurnoCancelado
 }
 
 export default turnosService;
