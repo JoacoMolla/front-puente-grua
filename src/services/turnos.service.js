@@ -44,7 +44,7 @@ const deleteTurno = async (datos) => {
 
 const updateTurnoCancelado = async (idTurno, descripcion) => {
     try {
-        const res = await axios.put(`${apiURL}/turnos`, {
+        const res = await axios.put(`${apiURL}/turnos/cancelar`, {
             params: {
                 idTurno: idTurno,
                 descripcion: descripcion
