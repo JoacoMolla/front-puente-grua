@@ -41,9 +41,9 @@ export function CrearTurno({ onSubmitComplete }) {
                             <h5>Registrar nuevo turno</h5>
 
                             <div className="form-row row">
-                                <div className="form-group col-md-3">
+                                <div className="form-group col-md-2">
 
-                                    <label>Fecha del turno</label>
+                                    <span>Fecha del turno</span>
                                     <input
                                         type="date"
                                         {...register("fechaInicioTurno", {
@@ -51,15 +51,6 @@ export function CrearTurno({ onSubmitComplete }) {
                                                 value: true,
                                                 message: "La fecha del turno es requerida."
                                                 },
-                                            //     validate: (value) => {
-                                            //         const fechaTurno = new Date(value);
-                                            //         const fechaActual = new Date();
-                                            //         if (fechaTurno < fechaActual) {
-                                            //             console.log('fecha turno: ', fechaTurno, 'fecha actual: ', fechaActual)
-                                            //             return "La fecha del turno no puede ser en el pasado ni en el mismo dia.";
-                                            //         }
-                                            //         return true;
-                                            // }
                                         })}
                                     />
                                 </div>
@@ -76,7 +67,7 @@ export function CrearTurno({ onSubmitComplete }) {
                                     />
                                 </div>
 
-                                <div className="form-group col-md-3">
+                                <div className="form-group col-md-2">
                                     <label>Zona inicial</label>
                                     <select className="form-control"
                                         // Crear una validacion de que no se seleccione default

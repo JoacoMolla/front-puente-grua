@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ModificarTurno } from "./ModificarTurno.js";
 import { CrearTurno } from "./CrearTurno.js";
 
-import materiasService from '../../services/turnos.service.js';
 import turnosService from "../../services/turnos.service.js";
 
 export function Turnos() {
@@ -22,7 +21,7 @@ export function Turnos() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const turnos = await materiasService.getAllTurnos();
+            const turnos = await turnosService.getAllTurnos();
             setLista(turnos);
         };
 
@@ -40,14 +39,14 @@ export function Turnos() {
     }
 
     const handleCrearTurnoSubmit = async () => {
-        const turnos = await materiasService.getAllTurnos();
+        const turnos = await turnosService.getAllTurnos();
         setLista(turnos);
     }
 
     const eliminarTurno = async (fila) => {
         const res = await turnosService.deleteTurno(fila.turno.idTurno);
         window.alert(res);
-        const turnos = await materiasService.getAllTurnos();
+        const turnos = await turnosService.getAllTurnos();
         setLista(turnos);
     }
     const mostrarTurnosCancelados = () => {

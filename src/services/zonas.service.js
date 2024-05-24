@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = 'http://localhost:3001';
+const apiURL = '/api';
 
 const getZonasVigentes = async () => {
     const res = await axios.get(`${apiURL}/zonas`);
